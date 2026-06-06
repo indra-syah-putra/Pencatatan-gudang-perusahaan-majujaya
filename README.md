@@ -1,66 +1,138 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# Pencatatan Gudang Persediaan — PT. Jaya Raya
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+Sistem pencatatan inventaris gudang berbasis web. Dibangun dengan Laravel 10, Tailwind CSS, Alpine.js, dan MySQL.
 
-## About Laravel
+---
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+## Fitur
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+- Login terpisah Admin (biru) & Staff (hijau) dengan captcha matematika
+- Dashboard: total barang, stok rendah, daftar barang terbaru
+- CRUD barang dengan soft delete
+- Transaksi barang masuk & keluar
+- Laporan stok PDF per bulan
+- Edit profil (nama + foto, hapus foto)
+- Pengaturan perusahaan (nama, alamat, telp, email, logo, tanda tangan)
+- Logo fallback ke huruf depan nama perusahaan
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+## Kebutuhan Sistem
 
-## Learning Laravel
+- PHP 8.1+
+- Composer
+- MySQL (via Laragon atau XAMPP)
+- Node.js & NPM (buat build CSS/JS)
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+## Cara Install
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
+1. Clone repo
+   ```
+   git clone https://github.com/indra-syah-putra/pencatatan-gudang-persediaan.git
+   cd pencatatan-gudang-persediaan
+   ```
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains over 2000 video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+2. Install dependency PHP
+   ```
+   composer install
+   ```
 
-## Laravel Sponsors
+3. Copy file env lalu atur database
+   ```
+   cp .env.example .env
+   ```
+   Sesuaikan `DB_DATABASE`, `DB_USERNAME`, `DB_PASSWORD` di `.env`
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the Laravel [Patreon page](https://patreon.com/taylorotwell).
+4. Generate key
+   ```
+   php artisan key:generate
+   ```
 
-### Premium Partners
+5. Install & build asset
+   ```
+   npm install
+   npm run build
+   ```
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Cubet Techno Labs](https://cubettech.com)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[Many](https://www.many.co.uk)**
-- **[Webdock, Fast VPS Hosting](https://www.webdock.io/en)**
-- **[DevSquad](https://devsquad.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[OP.GG](https://op.gg)**
-- **[WebReinvent](https://webreinvent.com/?utm_source=laravel&utm_medium=github&utm_campaign=patreon-sponsors)**
-- **[Lendio](https://lendio.com)**
+6. Migrasi database + seeder
+   ```
+   php artisan migrate --seed
+   ```
 
-## Contributing
+7. Buat symlink storage
+   ```
+   php artisan storage:link
+   ```
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+8. Jalankan server
+   ```
+   php artisan serve
+   ```
 
-## Code of Conduct
+Akses `http://localhost:8000` di browser.
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+## User Bawaan (Seeder)
 
-## Security Vulnerabilities
+| Role  | Email                  | Password |
+|-------|------------------------|----------|
+| Admin | admin@jayaraya.com     | password |
+| Staff | staff@jayaraya.com     | password |
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+## Login
 
-## License
+- `/admin/login` — Portal Admin
+- `/staff/login` — Portal Staff
+- `/login` — Otomatis redirect ke admin
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+## Struktur Direktori
+
+```
+app/
+├── Http/Controllers/
+│   ├── Admin/Auth/LoginController.php   # Login admin
+│   ├── Staff/Auth/LoginController.php   # Login staff
+│   ├── BarangController.php             # CRUD barang
+│   ├── TransaksiController.php          # Barang masuk/keluar
+│   ├── LaporanController.php            # Cetak PDF
+│   ├── DashboardController.php          # Dashboard
+│   ├── ProfileController.php            # Edit profil
+│   └── SettingsController.php           # Pengaturan perusahaan
+├── Models/
+│   ├── Barang.php
+│   ├── Pemasok.php
+│   ├── Persediaan.php
+│   ├── Transaksi.php
+│   └── Setting.php
+├── Helpers/
+│   ├── helpers.php                      # Fungsi company()
+│   └── Settings.php                     # Resolve DB fallback ke config
+└── Services/
+    └── CaptchaService.php               # Captcha matematika
+
+resources/views/
+├── layouts/app.blade.php                # Layout utama
+├── auth/
+│   ├── admin-login.blade.php            # Halaman login admin
+│   └── staff-login.blade.php            # Halaman login staff
+├── dashboard.blade.php
+├── barang/
+├── transaksi/
+├── laporan/
+├── profile/edit.blade.php
+└── settings/index.blade.php
+
+config/company.php                       # Default data perusahaan
+routes/web.php                           # Semua route
+routes/auth.php                          # Route auth (register, forgot password, dll)
+```
+
+## Teknologi
+
+- **Laravel 10** — Backend
+- **Tailwind CSS** — Styling (via Vite)
+- **Alpine.js** — Interaktivitas frontend
+- **MySQL** — Database
+- **DomPDF** — Cetak laporan PDF
+- **Font Awesome 6** — Icon
+
+## Lisensi
+
+MIT
