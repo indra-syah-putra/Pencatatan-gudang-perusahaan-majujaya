@@ -55,7 +55,7 @@
             {{-- HEADER PERUSAHAAN --}}
             <div class="border-b-4 border-double border-slate-800 pb-6 mb-8 text-center">
                 <h1 class="text-3xl font-extrabold uppercase tracking-widest text-slate-900 font-serif">
-                    PT. MAJU JAYA
+                    {{ company('name') }}
                 </h1>
                 <h2 class="text-xl font-bold text-slate-700 mt-1 font-serif">
                     LAPORAN STOK GUDANG
@@ -67,10 +67,10 @@
 
             {{-- INFO ALAMAT --}}
             <div class="text-sm text-slate-600 mb-8 text-justify leading-relaxed font-serif">
-                <p><strong>Alamat:</strong> Jl. Industri Raya No. 45, Kawasan Industri Cikarang, Bekasi, Jawa Barat.</p>
+                <p><strong>Alamat:</strong> {{ company('address') }}</p>
                 <p class="mt-1">
-                    <strong>Telp:</strong> (021) 8899-7766 &nbsp;|&nbsp;
-                    <strong>Email:</strong> gudang@majujaya.co.id
+                    <strong>Telp:</strong> {{ company('phone') }} &nbsp;|&nbsp;
+                    <strong>Email:</strong> {{ company('email') }}
                 </p>
             </div>
 
@@ -137,18 +137,18 @@
             <div class="mt-16 flex justify-between text-center text-sm font-serif">
                 <div class="w-1/3">
                     <p class="font-bold mb-12">Dibuat Oleh,</p>
-                    <p class="font-bold underline">Staff Gudang</p>
-                    <p class="text-xs text-slate-400 mt-1">NIP. 2023001</p>
+                    <p class="font-bold underline">{{ company('ttd_dibuat') }}</p>
+                    <p class="text-xs text-slate-400 mt-1">NIP. {{ company('ttd_dibuat_nip') }}</p>
                 </div>
                 <div class="w-1/3">
                     <p class="font-bold mb-12">Diperiksa Oleh,</p>
-                    <p class="font-bold underline">Kepala Gudang</p>
-                    <p class="text-xs text-slate-400 mt-1">NIP. 2023002</p>
+                    <p class="font-bold underline">{{ company('ttd_diperiksa') }}</p>
+                    <p class="text-xs text-slate-400 mt-1">NIP. {{ company('ttd_diperiksa_nip') }}</p>
                 </div>
                 <div class="w-1/3">
                     <p class="font-bold mb-12">Menyetujui,</p>
-                    <p class="font-bold underline">Manager Operasional</p>
-                    <p class="text-xs text-slate-400 mt-1">NIP. 2023003</p>
+                    <p class="font-bold underline">{{ company('ttd_menyetujui') }}</p>
+                    <p class="text-xs text-slate-400 mt-1">NIP. {{ company('ttd_menyetujui_nip') }}</p>
                 </div>
             </div>
 

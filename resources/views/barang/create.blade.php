@@ -23,13 +23,19 @@
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
                     <div>
                         <label class="block text-sm font-semibold text-slate-700 mb-2">Kode Barang</label>
-                        <input type="text" name="code" placeholder="BRG-001"
-                            class="w-full px-4 py-2.5 bg-slate-50 border border-slate-300 rounded-lg focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none transition-colors">
+                        <input type="text" name="code" placeholder="BRG-001" value="{{ old('code') }}"
+                            class="w-full px-4 py-2.5 bg-slate-50 border border-slate-300 rounded-lg focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none transition-colors @error('code') border-red-400 @enderror">
+                        @error('code')
+                            <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
+                        @enderror
                     </div>
                     <div class="md:col-span-2">
                         <label class="block text-sm font-semibold text-slate-700 mb-2">Nama Barang</label>
-                        <input type="text" name="name" required placeholder="Contoh: Laptop Asus"
-                            class="w-full px-4 py-2.5 bg-slate-50 border border-slate-300 rounded-lg focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none transition-colors">
+                        <input type="text" name="name" required placeholder="Contoh: Laptop Asus" value="{{ old('name') }}"
+                            class="w-full px-4 py-2.5 bg-slate-50 border border-slate-300 rounded-lg focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none transition-colors @error('name') border-red-400 @enderror">
+                        @error('name')
+                            <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
+                        @enderror
                     </div>
                 </div>
 
@@ -38,18 +44,24 @@
                     <div>
                         <label class="block text-sm font-semibold text-slate-700 mb-2">Kategori</label>
                         <select name="category"
-                            class="w-full px-4 py-2.5 bg-slate-50 border border-slate-300 rounded-lg focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none transition-colors">
-                            <option value="" disabled selected>Pilih Kategori</option>
-                            <option value="Elektronik">Elektronik</option>
-                            <option value="Furniture">Furniture</option>
-                            <option value="ATK">ATK</option>
-                            <option value="Lainnya">Lainnya</option>
+                            class="w-full px-4 py-2.5 bg-slate-50 border border-slate-300 rounded-lg focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none transition-colors @error('category') border-red-400 @enderror">
+                            <option value="" disabled {{ old('category') ? '' : 'selected' }}>Pilih Kategori</option>
+                            <option value="Elektronik" {{ old('category') == 'Elektronik' ? 'selected' : '' }}>Elektronik</option>
+                            <option value="Furniture" {{ old('category') == 'Furniture' ? 'selected' : '' }}>Furniture</option>
+                            <option value="ATK" {{ old('category') == 'ATK' ? 'selected' : '' }}>ATK</option>
+                            <option value="Lainnya" {{ old('category') == 'Lainnya' ? 'selected' : '' }}>Lainnya</option>
                         </select>
+                        @error('category')
+                            <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
+                        @enderror
                     </div>
                     <div>
                         <label class="block text-sm font-semibold text-slate-700 mb-2">Satuan</label>
-                        <input type="text" name="unit_of_measure" required placeholder="Pcs / Box"
-                            class="w-full px-4 py-2.5 bg-slate-50 border border-slate-300 rounded-lg focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none transition-colors">
+                        <input type="text" name="unit_of_measure" required placeholder="Pcs / Box" value="{{ old('unit_of_measure') }}"
+                            class="w-full px-4 py-2.5 bg-slate-50 border border-slate-300 rounded-lg focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none transition-colors @error('unit_of_measure') border-red-400 @enderror">
+                        @error('unit_of_measure')
+                            <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
+                        @enderror
                     </div>
                 </div>
 
@@ -57,13 +69,19 @@
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                     <div>
                         <label class="block text-sm font-semibold text-slate-700 mb-2">Harga Satuan (Rp)</label>
-                        <input type="number" name="price_per_unit" required placeholder="0"
-                            class="w-full px-4 py-2.5 bg-slate-50 border border-slate-300 rounded-lg focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none transition-colors">
+                        <input type="number" name="price_per_unit" required placeholder="0" value="{{ old('price_per_unit') }}"
+                            class="w-full px-4 py-2.5 bg-slate-50 border border-slate-300 rounded-lg focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none transition-colors @error('price_per_unit') border-red-400 @enderror">
+                        @error('price_per_unit')
+                            <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
+                        @enderror
                     </div>
                     <div>
                         <label class="block text-sm font-semibold text-slate-700 mb-2">Minimum Stok</label>
-                        <input type="number" name="min_stock" value="5" required
-                            class="w-full px-4 py-2.5 bg-slate-50 border border-slate-300 rounded-lg focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none transition-colors">
+                        <input type="number" name="min_stock" value="{{ old('min_stock', 5) }}" required
+                            class="w-full px-4 py-2.5 bg-slate-50 border border-slate-300 rounded-lg focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none transition-colors @error('min_stock') border-red-400 @enderror">
+                        @error('min_stock')
+                            <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
+                        @enderror
                     </div>
                 </div>
 

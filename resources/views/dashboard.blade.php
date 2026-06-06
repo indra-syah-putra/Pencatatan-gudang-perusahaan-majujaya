@@ -9,14 +9,7 @@
             <h2 class="text-2xl font-bold text-slate-900">Laporan Stok</h2>
             <p class="text-slate-500">Monitoring persediaan real-time & input transaksi.</p>
         </div>
-        <button onclick="window.print()"
-            class="hidden md:flex items-center gap-2 px-4 py-2 bg-white border border-slate-200 text-slate-600 rounded-lg hover:bg-slate-50 transition text-sm font-semibold shadow-sm">
-            <i class="fa-solid fa-print"></i> Cetak Laporan
-        </button>
     </div>
-
-    {{-- FORM TRANSAKSI CEPAT --}}
-
 
     {{-- SUMMARY CARDS --}}
     <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
@@ -24,7 +17,7 @@
         <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-200 flex items-center justify-between">
             <div>
                 <p class="text-xs font-bold text-slate-400 uppercase tracking-wider">Total Item</p>
-                <h3 class="text-3xl font-bold text-slate-800 mt-1">{{ App\Models\Barang::count() }}</h3>
+                <h3 class="text-3xl font-bold text-slate-800 mt-1">{{ $totalItems }}</h3>
             </div>
             <div class="w-12 h-12 rounded-full bg-blue-50 text-blue-600 flex items-center justify-center text-xl shadow-sm">
                 <i class="fa-solid fa-cubes"></i>
@@ -35,9 +28,7 @@
         <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-200 flex items-center justify-between">
             <div>
                 <p class="text-xs font-bold text-slate-400 uppercase tracking-wider">Stok Tipis</p>
-                <h3 class="text-3xl font-bold text-red-600 mt-2">
-                    {{ collect(App\Models\Barang::with('persediaan')->get())->filter(fn($item) => ($item->persediaan->quantity ?? 0) <= $item->min_stock)->count() }}
-                </h3>
+                <h3 class="text-3xl font-bold text-red-600 mt-2">{{ $lowStockCount }}</h3>
             </div>
             <div class="w-12 h-12 rounded-full bg-red-50 text-red-600 flex items-center justify-center text-xl shadow-sm">
                 <i class="fa-solid fa-triangle-exclamation"></i>
@@ -77,10 +68,6 @@
                 </thead>
 
                 <tbody class="divide-y divide-slate-100 bg-white">
-                    @php
-                        $barangs = \App\Models\Barang::with('persediaan')->latest()->get();
-                    @endphp
-
                     @forelse ($barangs as $item)
                         @php
                             $currentStock = $item->persediaan->quantity ?? 0;
@@ -126,11 +113,3 @@
         </div>
     </div>
 @endsection
-
-@push('scripts')
-    {{-- Anda bisa menambahkan script JS khusus untuk halaman dashboard di sini --}}
-    <script>
-        console.log('Dashboard Loaded');
-        // Contoh inisialisasi library JS jika diperlukan
-    </script>
-@endpush
