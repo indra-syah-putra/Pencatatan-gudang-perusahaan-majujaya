@@ -91,6 +91,7 @@ php artisan serve
 
 # Terminal 2: Jalankan compiler Vite untuk aset frontend
 npm run dev
+```
 
 ---
 ## Login
