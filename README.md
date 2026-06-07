@@ -1,3 +1,7 @@
+<p align="center">
+  <img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo">
+</p>
+
 # Pencatatan Gudang Persediaan — PT. Jaya Raya
 
 Sistem pencatatan inventaris gudang berbasis web. Dibangun dengan Laravel 10, Tailwind CSS, Alpine.js, dan MySQL.
@@ -13,7 +17,6 @@ Sistem pencatatan inventaris gudang berbasis web. Dibangun dengan Laravel 10, Ta
 - Laporan stok PDF per bulan
 - Edit profil (nama + foto, hapus foto)
 - Pengaturan perusahaan (nama, alamat, telp, email, logo, tanda tangan)
-- Logo fallback ke huruf depan nama perusahaan
 
 ## Kebutuhan Sistem
 
