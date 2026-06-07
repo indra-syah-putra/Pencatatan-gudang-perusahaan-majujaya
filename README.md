@@ -79,6 +79,19 @@ Akses `http://localhost:8000` di browser.
 | Admin | admin@jayaraya.com     | password |
 | Staff | staff@jayaraya.com     | password |
 
+## Mode Pengembangan (Development)
+
+Untuk masuk ke mode pengembangan agar setiap perubahan kode (baik di backend maupun frontend) bisa langsung terpantau secara *real-time*, kamu perlu menjalankan dua server sekaligus (Laravel Server dan Vite Dev Server).
+
+Jalankan perintah praktis berikut di terminal kamu:
+
+```bash
+# Terminal 1: Jalankan server lokal Laravel
+php artisan serve
+
+# Terminal 2: Jalankan compiler Vite untuk aset frontend
+npm run dev
+
 ## Login
 
 - `/admin/login` — Portal Admin
